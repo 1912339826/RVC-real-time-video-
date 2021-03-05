@@ -2,7 +2,7 @@
 	<div class="c-app" :class="{ 'c-dark-theme': $store.state.darkMode }">
 		<TheSidebar/>
 		<CWrapper>
-		<TheHeader/>
+		<!-- <TheHeader/> -->
 		<div class="c-body">
 			<main class="c-main">
 			<CContainer fluid>
