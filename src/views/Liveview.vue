@@ -227,7 +227,7 @@ export default {
   created() {},
   mounted() {
     // this.addWaterMarker();
-    // this.GetNodeList();
+    this.GetNodeList();
     this.updateUI();
     // this.cloudDevice()
   },
