@@ -5,6 +5,7 @@ import App from './App'
 import router from './router/index'
 import { iconsSet as icons } from './assets/icons/icons.js'
 import './assets/icon/iconfont.css'//字体
+import './assets/icon/font_0tgjq1ow89d/iconfont.css'
 import store from './store'
 import $ from 'jquery'
 

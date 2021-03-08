@@ -1,10 +1,14 @@
 <template>
     <div class="liveplay h5container">
-        <video class="h5video" :id="videoid" autoplay webkit-playsinline playsinline></video>
-        <div :id="videonameid" class="" >
+        <div :id="videonameid" class="" >1
             {{videoname}} {{picturequality}}
             <input type="button" :value="valuebutton"  @click="Bitstream($event.target.value)" :id="inputid" class=""/>
         </div>
+        <video class="h5video" :id="videoid" autoplay webkit-playsinline playsinline></video>
+        <!-- <div :id="videonameid" class="" >1
+            {{videoname}} {{picturequality}}
+            <input type="button" :value="valuebutton"  @click="Bitstream($event.target.value)" :id="inputid" class=""/>
+        </div> -->
         <div :id="rtcid" class=""></div>
         <!-- 画质 -->
         <span class=" "  :id="spanqualityid">

@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "20244105",
+      "name": "地铁安防_建筑",
+      "font_class": "u94",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "20244128",
+      "name": "地铁安防_摄像头",
+      "font_class": "u78",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 // Here you can add other styles
 // 顶部
-// $G_back:#181818;
-$G_back:rgba(242, 242, 242, 1);
+$G_back:#181818;
+// $G_back:rgba(242, 242, 242, 1);
 $top_back:#202020;
-// $top_back:rgba(215, 215, 215, 1);
-$top_viceback:#494A4C;
+$top_back:rgba(215, 215, 215, 1);
+// $top_viceback:#494A4C;
 $header_size:#FFFFFF;
 //实时播放页面
-// $liveview_lback:#2D2D2D;
-$liveview_lback:rgba(129, 211, 248, 0.0901960784313725);
+$liveview_lback:#2D2D2D;
+// $liveview_lback:rgba(129, 211, 248, 0.0901960784313725);
 //左侧栏
 $sidebar_back:#0C0C0C;
 $sidebar_size:#B7B7B7;
@@ -68,19 +68,19 @@ $collapse_size:#292929;
             }
         }
         .el-input__inner{
-            // background: #4A4A4C!important;
-            background-color: #ffffff;
+            background: #4A4A4C!important;
+            // background-color: #ffffff;
             color:rgba(255,255,255,1)!important;
         }
     }
     //实时播放页面
     .liveview{
         .liveview_left{
-            background-color: $liveview_lback;
-            // background-color: rgba(129, 211, 248, 0.0901960784313725);
+            // background-color: $liveview_lback;
+            background-color: rgba(129, 211, 248, 0.0901960784313725);
             .el-input__inner{ //输入框
-                // background-color:#4A4A4C !important;
-                background-color: #ffffff;
+                background-color:#4A4A4C !important;
+                // background-color: #ffffff;
                 border: none;
                 border-radius: 30px;
             }

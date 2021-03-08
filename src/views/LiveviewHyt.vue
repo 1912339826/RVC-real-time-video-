@@ -178,7 +178,7 @@
             </div>
           </section>
         </div>
-        <div class="con_right"  id="videoPanel">
+        <div class="con_right" id="videoPanel">
           <div id="video_hed">
             <div
               name="flex"
@@ -243,7 +243,77 @@ export default {
       contentHeight: "",
       contentWidth: "",
       filterText: "", //搜索框
-      data: [],
+      data: [
+        {
+          id: null,
+          name: "第一组",
+          label: "第一组",
+          iconclass: "iconfont icon-u94",
+          pid: "0",
+          hasChild: "1",
+          createBy: "admin",
+          createTime: "2021-03-08 10:25:54",
+          updateBy: "admin",
+          updateTime: "2021-03-08 10:26:03",
+          children: [
+            {
+              id: "1368749827235602433",
+              name: "101",
+              label: "101",
+              iconclass: "iconfont icon-u78",
+              pid: "1368749788824166402",
+              hasChild: null,
+              createBy: "admin",
+              createTime: "2021-03-08 10:26:03",
+              updateBy: null,
+              updateTime: null,
+              children: null,
+              children: [
+                {
+                  id: "1368133328728870914",
+                  code: "1008611",
+                  name: "华为001摄像头",
+                  parentcode: "10086",
+                  domaincode: "10086",
+                  devicemodeltype: "999",
+                  vendortype: "10010",
+                  deviceformtype: 1,
+                  type: 0,
+                  cameralocation: "走廊",
+                  camerastatus: 1,
+                  status: 1,
+                  nettype: 1,
+                  issupportintelligent: 1,
+                  enablevoice: 1,
+                  nvrcode: "10010110",
+                  isexdomain: 0,
+                  deviceip: "192.168.1.1",
+                  cameraGroupId: "1368749827235602433",
+                  createBy: "admin",
+                  createTime: "2021-03-06 17:36:18",
+                  updateBy: "admin",
+                  updateTime: "2021-03-08 10:33:29",
+                },
+              ],
+            },
+            {
+              id: "1368749985855791105",
+              name: "102",
+              label: "102",
+              iconclass: "iconfont icon-u78",
+              pid: "1368749788824166402",
+              hasChild: null,
+              createBy: "admin",
+              createTime: "2021-03-08 10:26:41",
+              updateBy: null,
+              updateTime: null,
+              children: null,
+              cameras: [],
+            },
+          ],
+          cameras: null,
+        },
+      ],
       defaultProps: {
         children: "children",
         label: "label",
@@ -262,8 +332,9 @@ export default {
   },
   created() {},
   mounted() {
+    console.log(require("../assets/imgs/u94.svg"));
     this.GetNodeList();
-    this.updateUI();
+    // this.updateUI();
   },
   activated() {},
   update() {},
@@ -277,33 +348,37 @@ export default {
     //设备列表
     GetNodeList() {
       let root = this.$store.state.IPPORT;
-      var url = root + "/api/cluster/v2/GetNodeList";
+      // var url = root + "/api/cluster/v2/GetNodeList";
+      // http://192.168.5.168:8080/speed-china/cameraGroup/cameraGroup/getTree
+      var url =
+        "http://192.168.5.168:8080/speed-china/cameraGroup/cameraGroup/getTree";
       this.$http
         .get(url)
         .then((result) => {
           console.log("节点列表", result);
           if (result.status == 200) {
-            if (result.data.node) {
-              var data = result.data.node;
-              if (Array.isArray(data)) {
-                data.sort((a, b) => {
-                  if (a.strNodeName === b.strNodeName) return 0;
+            if (result.data.result) {
+              var data = result.data.result;
+              this.data = this.to_data(data);
+              // if (Array.isArray(data)) {
+              //   data.sort((a, b) => {
+              //     if (a.strNodeName === b.strNodeName) return 0;
 
-                  return a.strNodeName > b.strNodeName ? 1 : -1;
-                });
-                for (var i = 0; i < data.length; i++) {
-                  var item = data[i];
+              //     return a.strNodeName > b.strNodeName ? 1 : -1;
+              //   });
+              //   for (var i = 0; i < data.length; i++) {
+              //     var item = data[i];
 
-                  this.data.push({
-                    token: item.strNodeId,
-                    label: item.strNodeName,
-                    iconclass: "iconfont icon-node",
-                    children: [],
-                  });
-                  this.GetsrcList(item.strNodeId);
-                }
-                console.log(this.data);
-              }
+              //     this.data.push({
+              //       // token: item.strNodeId,
+              //       label: item.strNodeName,
+              //       iconclass: "iconfont icon-node",
+              //       children: [],
+              //     });
+              //     // this.GetsrcList(item.strNodeId);
+              //   }
+              //   console.log(this.data);
+              // }
             }
             // console.log(this.NodeData)
           }
@@ -311,6 +386,28 @@ export default {
         .catch((error) => {
           console.log("GetNodeList");
         });
+    },
+    to_data(array) {
+      for (let index = 0; index < array.length; index++) {
+        let element = array[index];
+        element.label = element.name;
+        element.iconclass = "iconfont icon-u94";
+        for (let index = 0; index < element.children.length; index++) {
+          let element_children = element.children[index];
+          element_children.label = element.name;
+          element_children.iconclass = "iconfont icon-u78";
+          element_children.children = element_children.cameras;
+          for (
+            let index = 0;
+            index < element_children.children.length;
+            index++
+          ) {
+            let element_children_children = element_children.children[index];
+            element_children_children.label = element.name;
+          }
+        }
+      }
+      return array;
     },
     GetsrcList(strNodeId) {
       let root = this.$store.state.IPPORT;

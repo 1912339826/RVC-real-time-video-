@@ -11,10 +11,11 @@ import router from '@/router'
 axios.interceptors.request.use(
   config => {
     // console.log('http request',store.state.token);
-    if (store.state.token) {
-      config.headers.Authorization = `Bearer ${store.state.token}`
-      // console.log(config)
-    }
+    // if (store.state.token) {
+    //   config.headers.Authorization = `Bearer ${store.state.token}`
+    //   // console.log(config)
+    // }
+    config.headers["X-Access-Token"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTUxOTQyMDYsInVzZXJuYW1lIjoiYWRtaW4ifQ.Ajvq9PTLHrS8FtiHjsMSk0INL1EAD2jRufuvKUssulQ"
     return config
   },
   err => {

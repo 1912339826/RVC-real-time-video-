@@ -48,7 +48,7 @@ export default new Router({
   }),
   routes: [{
       path: "/",
-      redirect: '/Liveview'
+      redirect: '/Home'
     },
     // {
     //   path: '/Liveview',
@@ -59,113 +59,114 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: TheContainer,
-      //   meta: {
-      // type: 'Administrator'  // 是否需要判断是否登录,这里是需要判断
-      // },
+      meta: {
+        type: 'Administrator' // 是否需要判断是否登录,这里是需要判断
+      },
       children: [{
-        path: 'Dashboard',
-        name: 'Dashboard',
-        component: Dashboard,
-        meta: {
-          title: '/Dashboard',
-          name: i18n.tc("message.left.dashboard"),
-          icon: 'iconfont icon-11111-copy',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        }
-      }, {
-        path: 'Liveview',
-        name: 'Liveview',
-        component: Liveview,
-        meta: {
-          title: '/Liveview',
-          name: i18n.tc("message.live.liveview"),
-          icon: 'iconfont icon-shipin1',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        },
-      },
-      {
-        path: 'LiveviewHyt',
-        name: 'LiveviewHyt',
-        component: LiveviewHyt,
-        meta: {
-          title: '/LiveviewHyt',
-          name: i18n.tc("message.live.LiveviewHyt"),
-          icon: 'iconfont icon-shipin1',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        },
-      },
-       {
-        path: 'Event',
-        name: 'Event',
-        component: Event,
-        meta: {
-          title: '/Event',
-          name: i18n.tc("message.left.dashboard"),
-          icon: 'iconfont icon-11111-copy',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        }
-      }, {
-        path: 'Nodemonitoring',
-        name: 'Nodemonitoring',
-        component: Nodemonitoring,
-        meta: {
-          title: '/Nodemonitoring',
-          name: i18n.tc("message.left.dashboard"),
-          icon: 'iconfont icon-11111-copy',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        }
-      }, {
-        path: 'Devlist',
-        name: 'Devlist',
-        component: Devlist,
-        meta: {
-          title: '/Devlist',
-          name: i18n.tc("message.left.dashboard"),
-          icon: 'iconfont icon-11111-copy',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        }
-      }, {
-        path: 'Devresources',
-        name: 'Devresources',
-        component: Devresources,
-        meta: {
-          title: '/Devresources',
-          name: i18n.tc("message.left.dashboard"),
-          icon: 'iconfont icon-11111-copy',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        }
-      }, {
-        path: 'Replay',
-        name: 'Replay',
-        component: Replay,
-        meta: {
-          title: '/Replay/Advancepb',
-          name: i18n.tc("message.left.playback"),
-          icon: 'iconfont icon-bofang1',
-          type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-        },
-        children: [{
-          path: 'Advancepb',
-          name: 'Advancepb',
-          component: Advancepb,
+          path: 'Dashboard',
+          name: 'Dashboard',
+          component: Dashboard,
           meta: {
-            title: 'Advancepb',
-            name: i18n.tc("message.left.AdvancePB"),
-            icon: 'iconfont icon-bofang1',
+            title: '/Dashboard',
+            name: i18n.tc("message.left.dashboard"),
+            icon: 'iconfont icon-11111-copy',
             type: 'Operator' // 是否需要判断是否登录,这里是需要判断
-          },
+          }
         }, {
-          path: 'Archive',
-          name: 'Archive',
-          component: Archive,
+          path: 'Liveview',
+          name: 'Liveview',
+          component: Liveview,
           meta: {
-            title: 'Archive',
-            name: i18n.tc("message.left.AdvancePB"),
+            title: '/Liveview',
+            name: i18n.tc("message.live.liveview"),
+            icon: 'iconfont icon-shipin1',
+            type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+          },
+        },
+        {
+          path: 'LiveviewHyt',
+          name: 'LiveviewHyt',
+          component: LiveviewHyt,
+          meta: {
+            title: '/LiveviewHyt',
+            name: i18n.tc("message.live.LiveviewHyt"),
+            icon: 'iconfont icon-shipin1',
+            type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+          },
+        },
+        {
+          path: 'Event',
+          name: 'Event',
+          component: Event,
+          meta: {
+            title: '/Event',
+            name: i18n.tc("message.left.dashboard"),
+            icon: 'iconfont icon-11111-copy',
+            type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+          }
+        }, {
+          path: 'Nodemonitoring',
+          name: 'Nodemonitoring',
+          component: Nodemonitoring,
+          meta: {
+            title: '/Nodemonitoring',
+            name: i18n.tc("message.left.dashboard"),
+            icon: 'iconfont icon-11111-copy',
+            type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+          }
+        }, {
+          path: 'Devlist',
+          name: 'Devlist',
+          component: Devlist,
+          meta: {
+            title: '/Devlist',
+            name: i18n.tc("message.left.dashboard"),
+            icon: 'iconfont icon-11111-copy',
+            type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+          }
+        }, {
+          path: 'Devresources',
+          name: 'Devresources',
+          component: Devresources,
+          meta: {
+            title: '/Devresources',
+            name: i18n.tc("message.left.dashboard"),
+            icon: 'iconfont icon-11111-copy',
+            type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+          }
+        }, {
+          path: 'Replay',
+          name: 'Replay',
+          component: Replay,
+          meta: {
+            title: '/Replay/Advancepb',
+            name: i18n.tc("message.left.playback"),
             icon: 'iconfont icon-bofang1',
             type: 'Operator' // 是否需要判断是否登录,这里是需要判断
           },
-        }]
-      }, ]
+          children: [{
+            path: 'Advancepb',
+            name: 'Advancepb',
+            component: Advancepb,
+            meta: {
+              title: 'Advancepb',
+              name: i18n.tc("message.left.AdvancePB"),
+              icon: 'iconfont icon-bofang1',
+              type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+            },
+          }, {
+            path: 'Archive',
+            name: 'Archive',
+            component: Archive,
+            meta: {
+              title: 'Archive',
+              name: i18n.tc("message.left.AdvancePB"),
+              icon: 'iconfont icon-bofang1',
+              type: 'Operator' // 是否需要判断是否登录,这里是需要判断
+            },
+          }]
+        },
+      ]
     }, {
       path: '/Login',
       name: 'Login',
