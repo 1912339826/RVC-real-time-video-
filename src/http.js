@@ -15,7 +15,7 @@ axios.interceptors.request.use(
     //   config.headers.Authorization = `Bearer ${store.state.token}`
     //   // console.log(config)
     // }
-    config.headers["X-Access-Token"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTUxOTQyMDYsInVzZXJuYW1lIjoiYWRtaW4ifQ.Ajvq9PTLHrS8FtiHjsMSk0INL1EAD2jRufuvKUssulQ"
+    config.headers["X-Access-Token"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTUzNjYzNzAsInVzZXJuYW1lIjoiYWRtaW4ifQ.59jQz7MQu2N8p4b9TuAPlm5-pVJnGKnSe9oUSubLBvc"
     return config
   },
   err => {
