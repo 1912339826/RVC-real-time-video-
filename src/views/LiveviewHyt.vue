@@ -12,7 +12,10 @@
             <span>存储为视图</span>
           </div>
           <div class="search">
-            <el-input v-model="filterText" placeholder="请输入关键字"></el-input>
+            <el-input
+              v-model="filterText"
+              placeholder="请输入关键字"
+            ></el-input>
             <el-button type="primary">搜索</el-button>
           </div>
         </section>
@@ -107,7 +110,7 @@
                 </div>
                 <div class="right">1</div>
               </div>
-              <div class="bottom">
+              <!-- <div class="bottom">
                 <div class="">速度</div>
                 <div class="slider_hyt">
                   <span
@@ -122,7 +125,7 @@
                     @click="jia_slider_fun"
                   ></span>
                 </div>
-              </div>
+              </div> -->
             </div>
           </section>
           <section class="JKSH">
@@ -270,10 +273,10 @@ export default {
               children: [
                 {
                   id: "1368133328728870914",
-                  token:"1368133328728870914",
+                  token: "1368133328728870914",
                   code: "1008611",
                   name: "华为001摄像头",
-                  label:"华为001摄像头",
+                  label: "华为001摄像头",
                   parentcode: "10086",
                   domaincode: "10086",
                   devicemodeltype: "999",
@@ -333,7 +336,7 @@ export default {
   },
   created() {},
   mounted() {
-    console.log(require("../assets/imgs/u94.svg"));
+    console.log(window.location.protocol);
     this.GetNodeList();
     this.updateUI();
   },
@@ -407,7 +410,7 @@ export default {
             let element_children_children = element_children.children[index];
             element_children_children.label = element_children_children.name;
             element_children_children.token = element_children_children.id;
-            this.GetsrcList(element_children_children.id)
+            this.GetsrcList(element_children_children.id);
           }
         }
       }
@@ -737,38 +740,66 @@ export default {
 
     //树形节点点击
     handleNodeClick(data, checked, indeterminate) {
-      console.log(data)
+      console.log(data);
+      if (!!data.id && !!data.code) {
+        // var url =
+        //   `http://192.168.5.168:8080/speed-china/cameraCurrentUrl/cameraCurrentUrl/getUrl?cameraId=${data.id}&cameraCode=${data.code}`;
+        // this.$http
+        //   .get(url)
+        //   .then((result) => {
+        //     console.log("111111111111", result);
+        //     if (result.status == 200) {
+        //       if (result.data.result) {
+        //       }
+        //       // console.log(this.NodeData)
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     console.log("/cameraCurrentUrl/cameraCurrentUrl/getUrl");
+        //   });
+      }
+
       // if (data.streamprofile == undefined) {
       //   data.streamprofile = "main";
       // }
       // // return false;
       // let _this = this;
-      // if (data.disabled_me == false) {
-      //   // document.getElementById("icon"+data.token).style.color="#5fbfa7";
-      //   if (data.token) {
-      //     let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
+      // // if (data.disabled_me == false) {
+      // document.getElementById("icon" + data.token).style.color = "#5fbfa7";
+      // if (data.token) {
+      //   let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
 
-      //     var vdata = {
-      //       token: data.token,
-      //       streamprofile: data.streamprofile,
-      //       name: data.name,
-      //       label: data.label,
-      //       vid: vid,
-      //     };
-      //     var viewdata = {
-      //       strIndex: vid,
-      //       strToken: data.token,
-      //       strStream: data.streamprofile,
-      //     };
-      //     _this.$store.state.liveplay = vdata;
-      //     _this.$store.state.liveviewadd.push(viewdata);
-      //     console.log(
-      //       "----------------------",
-      //       vdata,
-      //       _this.$store.state.liveplay
-      //     );
-      //     // _this.$root.bus.$emit('liveplay', data.token, data.streamprofile, data.name,data.label,vid);
-      //   }
+      //   var vdata = {
+      //     token: data.token,
+      //     streamprofile: data.streamprofile,
+      //     name: data.name,
+      //     label: data.label,
+      //     vid: vid,
+      //   };
+      //   var viewdata = {
+      //     strIndex: vid,
+      //     strToken: data.token,
+      //     strStream: data.streamprofile,
+      //   };
+      //   _this.$store.state.liveplay = vdata;
+      //   _this.$store.state.liveviewadd.push(viewdata);
+      //   console.log(
+      //     "----------------------",
+      //     vdata,
+      //     _this.$store.state.liveplay
+      //   );
+      //   _this.$root.bus.$emit(
+      //     "liveplay",
+      //     data.token,
+      //     data.streamprofile,
+      //     data.name,
+      //     data.label,
+      //     vid
+      //   );
+      // }
+
+
+      
       //   if (data.strToken) {
       //     console.log(data.strToken);
       //     let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
@@ -1163,8 +1194,8 @@ export default {
             margin-right: 0.3vw;
           }
         }
-        .cursor_hyt{
-          &:hover{
+        .cursor_hyt {
+          &:hover {
             cursor: pointer;
           }
         }
