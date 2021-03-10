@@ -48,7 +48,7 @@ export default new Router({
   }),
   routes: [{
       path: "/",
-      redirect: '/Home'
+      redirect: '/LiveviewHyt'
     },
     // {
     //   path: '/Liveview',

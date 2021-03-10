@@ -1,5 +1,7 @@
 const webpack = require('webpack')
+// publicPath:"./",
 module.exports = {
+
   lintOnSave: false,
   runtimeCompiler: true,
   configureWebpack: {

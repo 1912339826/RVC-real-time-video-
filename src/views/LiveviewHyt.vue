@@ -3,16 +3,16 @@
     <div class="box">
       <div class="header">
         <section class="header_left">
-          <div>
+          <div class="cursor_hyt" @click="Refresh('device')">
             <img src="../assets/imgs/u33.svg" alt="" />
             <span>刷新</span>
           </div>
-          <div>
+          <div class="cursor_hyt" @click="viewadd">
             <img src="../assets/imgs/u35.svg" alt="" />
             <span>存储为视图</span>
           </div>
           <div class="search">
-            <el-input v-model="input" placeholder="请输入关键字"></el-input>
+            <el-input v-model="filterText" placeholder="请输入关键字"></el-input>
             <el-button type="primary">搜索</el-button>
           </div>
         </section>
@@ -227,7 +227,6 @@ export default {
   props: {},
   data() {
     return {
-      input: "",
       value2: 100,
       NewView: this.$t("message.live.NewView"),
       ViewName: this.$t("message.live.ViewName"),
@@ -271,8 +270,10 @@ export default {
               children: [
                 {
                   id: "1368133328728870914",
+                  token:"1368133328728870914",
                   code: "1008611",
                   name: "华为001摄像头",
+                  label:"华为001摄像头",
                   parentcode: "10086",
                   domaincode: "10086",
                   devicemodeltype: "999",
@@ -334,7 +335,7 @@ export default {
   mounted() {
     console.log(require("../assets/imgs/u94.svg"));
     this.GetNodeList();
-    // this.updateUI();
+    this.updateUI();
   },
   activated() {},
   update() {},
@@ -394,7 +395,8 @@ export default {
         element.iconclass = "iconfont icon-u94";
         for (let index = 0; index < element.children.length; index++) {
           let element_children = element.children[index];
-          element_children.label = element.name;
+          element_children.label = element_children.name;
+          element_children.token = element_children.id;
           element_children.iconclass = "iconfont icon-u78";
           element_children.children = element_children.cameras;
           for (
@@ -403,7 +405,9 @@ export default {
             index++
           ) {
             let element_children_children = element_children.children[index];
-            element_children_children.label = element.name;
+            element_children_children.label = element_children_children.name;
+            element_children_children.token = element_children_children.id;
+            this.GetsrcList(element_children_children.id)
           }
         }
       }
@@ -733,91 +737,92 @@ export default {
 
     //树形节点点击
     handleNodeClick(data, checked, indeterminate) {
-      if (data.streamprofile == undefined) {
-        data.streamprofile = "main";
-      }
-      // return false;
-      let _this = this;
-      if (data.disabled_me == false) {
-        // document.getElementById("icon"+data.token).style.color="#5fbfa7";
-        if (data.token) {
-          let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
+      console.log(data)
+      // if (data.streamprofile == undefined) {
+      //   data.streamprofile = "main";
+      // }
+      // // return false;
+      // let _this = this;
+      // if (data.disabled_me == false) {
+      //   // document.getElementById("icon"+data.token).style.color="#5fbfa7";
+      //   if (data.token) {
+      //     let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
 
-          var vdata = {
-            token: data.token,
-            streamprofile: data.streamprofile,
-            name: data.name,
-            label: data.label,
-            vid: vid,
-          };
-          var viewdata = {
-            strIndex: vid,
-            strToken: data.token,
-            strStream: data.streamprofile,
-          };
-          _this.$store.state.liveplay = vdata;
-          _this.$store.state.liveviewadd.push(viewdata);
-          console.log(
-            "----------------------",
-            vdata,
-            _this.$store.state.liveplay
-          );
-          // _this.$root.bus.$emit('liveplay', data.token, data.streamprofile, data.name,data.label,vid);
-        }
-        if (data.strToken) {
-          console.log(data.strToken);
-          let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
-          var vdata = {
-            token: data.strToken,
-            streamprofile: data.streamprofile,
-            name: data.name,
-            label: data.label,
-            vid: vid,
-          };
-          var viewdata = {
-            strIndex: vid,
-            strToken: data.strToken,
-            strStream: data.streamprofile,
-          };
-          _this.$store.state.liveplay = vdata;
-          _this.$store.state.liveviewadd.push(viewdata);
-          console.log(
-            "----------------------",
-            vdata,
-            _this.$store.state.liveplay
-          );
-          // _this.$root.bus.$emit('liveplay', data.strToken, data.streamprofile, data.name,data.strName,vid);
-        }
+      //     var vdata = {
+      //       token: data.token,
+      //       streamprofile: data.streamprofile,
+      //       name: data.name,
+      //       label: data.label,
+      //       vid: vid,
+      //     };
+      //     var viewdata = {
+      //       strIndex: vid,
+      //       strToken: data.token,
+      //       strStream: data.streamprofile,
+      //     };
+      //     _this.$store.state.liveplay = vdata;
+      //     _this.$store.state.liveviewadd.push(viewdata);
+      //     console.log(
+      //       "----------------------",
+      //       vdata,
+      //       _this.$store.state.liveplay
+      //     );
+      //     // _this.$root.bus.$emit('liveplay', data.token, data.streamprofile, data.name,data.label,vid);
+      //   }
+      //   if (data.strToken) {
+      //     console.log(data.strToken);
+      //     let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
+      //     var vdata = {
+      //       token: data.strToken,
+      //       streamprofile: data.streamprofile,
+      //       name: data.name,
+      //       label: data.label,
+      //       vid: vid,
+      //     };
+      //     var viewdata = {
+      //       strIndex: vid,
+      //       strToken: data.strToken,
+      //       strStream: data.streamprofile,
+      //     };
+      //     _this.$store.state.liveplay = vdata;
+      //     _this.$store.state.liveviewadd.push(viewdata);
+      //     console.log(
+      //       "----------------------",
+      //       vdata,
+      //       _this.$store.state.liveplay
+      //     );
+      //     // _this.$root.bus.$emit('liveplay', data.strToken, data.streamprofile, data.name,data.strName,vid);
+      //   }
 
-        _this.$nextTick(() => {
-          setTimeout(() => {
-            for (var i = 1; i <= this.rows; i++) {
-              for (var c = 1; c <= this.cols; c++) {
-                var video = document.getElementById("hvideo" + i + c);
-                console.log("video.paused++++", video.poster);
-                if (
-                  video.poster == "" ||
-                  video.poster == "http://localhost:6080/" ||
-                  video.poster == _this.$store.state.IPPORT
-                ) {
-                  this.selectCol = c;
-                  this.selectRow = i;
-                  $(".h5container").removeClass("h5videoh");
-                  $("#h" + this.selectRow + this.selectCol).addClass(
-                    "h5videoh"
-                  );
-                  // console.log('video.paused1',video.poster,i,c);
-                  return false;
-                } else {
-                  console.log("video.paused1", video.poster);
-                }
-              }
-            }
-          }, 300);
-        });
-      } else {
-        console.log("不可用");
-      }
+      //   _this.$nextTick(() => {
+      //     setTimeout(() => {
+      //       for (var i = 1; i <= this.rows; i++) {
+      //         for (var c = 1; c <= this.cols; c++) {
+      //           var video = document.getElementById("hvideo" + i + c);
+      //           console.log("video.paused++++", video.poster);
+      //           if (
+      //             video.poster == "" ||
+      //             video.poster == "http://localhost:6080/" ||
+      //             video.poster == _this.$store.state.IPPORT
+      //           ) {
+      //             this.selectCol = c;
+      //             this.selectRow = i;
+      //             $(".h5container").removeClass("h5videoh");
+      //             $("#h" + this.selectRow + this.selectCol).addClass(
+      //               "h5videoh"
+      //             );
+      //             // console.log('video.paused1',video.poster,i,c);
+      //             return false;
+      //           } else {
+      //             console.log("video.paused1", video.poster);
+      //           }
+      //         }
+      //       }
+      //     }, 300);
+      //   });
+      // } else {
+      //   console.log("不可用");
+      // }
     },
     //拖动播放
     dragStart(ev, token, label, streamprofile, name, disabled_me) {
@@ -1156,6 +1161,11 @@ export default {
           align-items: center;
           img {
             margin-right: 0.3vw;
+          }
+        }
+        .cursor_hyt{
+          &:hover{
+            cursor: pointer;
           }
         }
         .search {
