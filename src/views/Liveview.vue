@@ -599,7 +599,7 @@ export default {
       // return false;
       let _this = this;
       if (data.disabled_me == false) {
-        // document.getElementById("icon"+data.token).style.color="#5fbfa7";
+        document.getElementById("icon"+data.token).style.color="#5fbfa7";
         if (data.token) {
           let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
 

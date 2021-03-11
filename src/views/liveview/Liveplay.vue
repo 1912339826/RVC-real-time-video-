@@ -1,10 +1,11 @@
 <template>
     <div class="liveplay h5container">
-        <div :id="videonameid" class="" >1
+        <div :id="videonameid" class="" >
             {{videoname}} {{picturequality}}
             <input type="button" :value="valuebutton"  @click="Bitstream($event.target.value)" :id="inputid" class=""/>
         </div>
         <video class="h5video" :id="videoid" autoplay webkit-playsinline playsinline></video>
+        <!-- <video src="http://192.16.3.45:8080/ws.html?token=122&autoplay=true" :id="videoid" ></video> -->
         <!-- <div :id="videonameid" class="" >1
             {{videoname}} {{picturequality}}
             <input type="button" :value="valuebutton"  @click="Bitstream($event.target.value)" :id="inputid" class=""/>
@@ -45,7 +46,7 @@
             </div>
         </div>
         <div class="liveplay_butt">
-            <!-- <CDropdown
+            <CDropdown
                 class="fw_butt"
                 style=""
                 color="link"
@@ -75,7 +76,7 @@
             <button class="iconfont icon-camerafill" @click="DoSnapshot"></button>
             <button class="iconfont icon-videofill" @click="DoManualRecordStart"></button>
             <button class="iconfont icon-radioboxfill" @click="DoManualRecordStop"></button>
-            <button class="ptz_id_show iconfont icon-yuntai" @click="PtzControlShow"></button> -->
+            <button class="ptz_id_show iconfont icon-yuntai" @click="PtzControlShow"></button>
             <button class="iconfont icon-full" @click="FullScreen"></button>
             <button class="iconfont icon-roundclosefill" @click="CloseVideo('close')"></button>
         </div>

@@ -272,8 +272,8 @@ export default {
               children: null,
               children: [
                 {
-                  id: "1368133328728870914",
-                  token: "1368133328728870914",
+                  id: "121",
+                  token: "121",
                   code: "1008611",
                   name: "华为001摄像头",
                   label: "华为001摄像头",
@@ -312,7 +312,35 @@ export default {
               updateBy: null,
               updateTime: null,
               children: null,
-              cameras: [],
+              children: [
+                {
+                  id: "122",
+                  token: "122",
+                  code: "1008611",
+                  name: "华为001摄像头",
+                  label: "华为001摄像头",
+                  parentcode: "10086",
+                  domaincode: "10086",
+                  devicemodeltype: "999",
+                  vendortype: "10010",
+                  deviceformtype: 1,
+                  type: 0,
+                  cameralocation: "走廊",
+                  camerastatus: 1,
+                  status: 1,
+                  nettype: 1,
+                  issupportintelligent: 1,
+                  enablevoice: 1,
+                  nvrcode: "10010110",
+                  isexdomain: 0,
+                  deviceip: "192.168.1.1",
+                  cameraGroupId: "1368749827235602433",
+                  createBy: "admin",
+                  createTime: "2021-03-06 17:36:18",
+                  updateBy: "admin",
+                  updateTime: "2021-03-08 10:33:29",
+                },
+              ],
             },
           ],
           cameras: null,
@@ -337,8 +365,29 @@ export default {
   created() {},
   mounted() {
     console.log(window.location.protocol);
-    this.GetNodeList();
+    this.GetNodeList();``
     this.updateUI();
+    // // new WebSocket("ws://192.16.3.1:1156/api/v1/h5srtcapi");
+    // // 初始化一个 WebSocket 对象
+    // // var ws = new WebSocket("ws://192.16.3.45:8080/api/v1/h5srtcapi?token=121&profile=main&session=6172ac61-0f01-4d75-843f-b359e1d7d1d6");
+
+    // // 建立 web socket 连接成功触发事件
+    // ws.onopen = function () {
+    //   // 使用 send() 方法发送数据
+    //   ws.send("发送数据");
+    //   alert("数据发送中...");
+    // };
+
+    // // 接收服务端数据时触发事件
+    // ws.onmessage = function (evt) {
+    //   var received_msg = evt.data;
+    //   alert("数据已接收...");
+    // };
+
+    // // 断开 web socket 连接成功触发事件
+    // ws.onclose = function () {
+    //   alert("连接已关闭...");
+    // };
   },
   activated() {},
   update() {},
@@ -741,36 +790,68 @@ export default {
     //树形节点点击
     handleNodeClick(data, checked, indeterminate) {
       console.log(data);
-      if (!!data.id && !!data.code) {
-        // var url =
-        //   `http://192.168.5.168:8080/speed-china/cameraCurrentUrl/cameraCurrentUrl/getUrl?cameraId=${data.id}&cameraCode=${data.code}`;
-        // this.$http
-        //   .get(url)
-        //   .then((result) => {
-        //     console.log("111111111111", result);
-        //     if (result.status == 200) {
-        //       if (result.data.result) {
-        //       }
-        //       // console.log(this.NodeData)
-        //     }
-        //   })
-        //   .catch((error) => {
-        //     console.log("/cameraCurrentUrl/cameraCurrentUrl/getUrl");
-        //   });
-      }
+      // if (!!data.id && !!data.code) {
+      //   var url =
+      //     `http://192.168.5.168:8080/speed-china/camera/camera/getUrl?cameraId=${data.id}&cameraCode=${data.code}`;
+      //   this.$http
+      //     .get(url)
+      //     .then((result) => {
+      //       console.log("111111111111", result);
+      //       if (result.status == 200) {
+      //         if (result.data.result) {
+      //         }
+      //         // console.log(this.NodeData)
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.log("/camera/camera/getUrl");
+      //     });
+      // }
 
       // if (data.streamprofile == undefined) {
-      //   data.streamprofile = "main";
+      data.streamprofile = "main";
       // }
       // // return false;
-      // let _this = this;
-      // // if (data.disabled_me == false) {
+      let _this = this;
+      // if (data.disabled_me == false) {
       // document.getElementById("icon" + data.token).style.color = "#5fbfa7";
-      // if (data.token) {
-      //   let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
+      if (data.token) {
+        let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
 
+        var vdata = {
+          token: data.token,
+          streamprofile: data.streamprofile,
+          name: data.name,
+          label: data.label,
+          vid: vid,
+        };
+        var viewdata = {
+          strIndex: vid,
+          strToken: data.token,
+          strStream: data.streamprofile,
+        };
+        _this.$store.state.liveplay = vdata;
+        _this.$store.state.liveviewadd.push(viewdata);
+        console.log(
+          "----------------------",
+          vdata,
+          _this.$store.state.liveplay
+        );
+        // _this.$root.bus.$emit(
+        //   "liveplay",
+        //   data.token,
+        //   data.streamprofile,
+        //   data.name,
+        //   data.label,
+        //   vid
+        // );
+      }
+
+      // if (data.strToken) {
+      //   console.log(data.strToken);
+      //   let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
       //   var vdata = {
-      //     token: data.token,
+      //     token: data.strToken,
       //     streamprofile: data.streamprofile,
       //     name: data.name,
       //     label: data.label,
@@ -778,7 +859,7 @@ export default {
       //   };
       //   var viewdata = {
       //     strIndex: vid,
-      //     strToken: data.token,
+      //     strToken: data.strToken,
       //     strStream: data.streamprofile,
       //   };
       //   _this.$store.state.liveplay = vdata;
@@ -788,69 +869,33 @@ export default {
       //     vdata,
       //     _this.$store.state.liveplay
       //   );
-      //   _this.$root.bus.$emit(
-      //     "liveplay",
-      //     data.token,
-      //     data.streamprofile,
-      //     data.name,
-      //     data.label,
-      //     vid
-      //   );
+      //   // _this.$root.bus.$emit('liveplay', data.strToken, data.streamprofile, data.name,data.strName,vid);
       // }
 
-
-      
-      //   if (data.strToken) {
-      //     console.log(data.strToken);
-      //     let vid = "h" + _this.$data.selectRow + _this.$data.selectCol;
-      //     var vdata = {
-      //       token: data.strToken,
-      //       streamprofile: data.streamprofile,
-      //       name: data.name,
-      //       label: data.label,
-      //       vid: vid,
-      //     };
-      //     var viewdata = {
-      //       strIndex: vid,
-      //       strToken: data.strToken,
-      //       strStream: data.streamprofile,
-      //     };
-      //     _this.$store.state.liveplay = vdata;
-      //     _this.$store.state.liveviewadd.push(viewdata);
-      //     console.log(
-      //       "----------------------",
-      //       vdata,
-      //       _this.$store.state.liveplay
-      //     );
-      //     // _this.$root.bus.$emit('liveplay', data.strToken, data.streamprofile, data.name,data.strName,vid);
-      //   }
-
-      //   _this.$nextTick(() => {
-      //     setTimeout(() => {
-      //       for (var i = 1; i <= this.rows; i++) {
-      //         for (var c = 1; c <= this.cols; c++) {
-      //           var video = document.getElementById("hvideo" + i + c);
-      //           console.log("video.paused++++", video.poster);
-      //           if (
-      //             video.poster == "" ||
-      //             video.poster == "http://localhost:6080/" ||
-      //             video.poster == _this.$store.state.IPPORT
-      //           ) {
-      //             this.selectCol = c;
-      //             this.selectRow = i;
-      //             $(".h5container").removeClass("h5videoh");
-      //             $("#h" + this.selectRow + this.selectCol).addClass(
-      //               "h5videoh"
-      //             );
-      //             // console.log('video.paused1',video.poster,i,c);
-      //             return false;
-      //           } else {
-      //             console.log("video.paused1", video.poster);
-      //           }
-      //         }
-      //       }
-      //     }, 300);
-      //   });
+      _this.$nextTick(() => {
+        setTimeout(() => {
+          for (var i = 1; i <= this.rows; i++) {
+            for (var c = 1; c <= this.cols; c++) {
+              var video = document.getElementById("hvideo" + i + c);
+              console.log("video.paused++++", video.poster);
+              if (
+                video.poster == "" ||
+                video.poster == "http://192.16.3.45:8080/" ||
+                video.poster == _this.$store.state.IPPORT
+              ) {
+                this.selectCol = c;
+                this.selectRow = i;
+                $(".h5container").removeClass("h5videoh");
+                $("#h" + this.selectRow + this.selectCol).addClass("h5videoh");
+                // console.log('video.paused1',video.poster,i,c);
+                return false;
+              } else {
+                console.log("video.paused1", video.poster);
+              }
+            }
+          }
+        }, 300);
+      });
       // } else {
       //   console.log("不可用");
       // }

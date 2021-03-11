@@ -67,9 +67,10 @@ export default {
         };
     },
     mounted(){
-        // console.log(sessionStorage.getItem('clustertoken'))
+        console.log(sessionStorage.getItem('clustertoken'),'111111111')
         $("#prompt").hide();
         $("#prompt1").hide();
+
     },
     methods: {
         langchang(){
