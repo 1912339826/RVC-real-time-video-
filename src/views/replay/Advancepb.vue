@@ -1639,7 +1639,8 @@ export default {
   }
   .playback_snap_you {
     width: 82%;
-    height: 87vh;
+    // height: 87vh;
+    height: 100vh;
     #videoPanel {
       .videoClickColor {
         /* border: 2px solid #f44336 !important;

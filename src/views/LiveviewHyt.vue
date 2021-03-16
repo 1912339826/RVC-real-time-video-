@@ -365,7 +365,7 @@ export default {
   created() {},
   mounted() {
     console.log(window.location.protocol);
-    this.GetNodeList();``
+    this.GetNodeList();
     this.updateUI();
     // // new WebSocket("ws://192.16.3.1:1156/api/v1/h5srtcapi");
     // // 初始化一个 WebSocket 对象
@@ -401,40 +401,14 @@ export default {
     //设备列表
     GetNodeList() {
       let root = this.$store.state.IPPORT;
-      // var url = root + "/api/cluster/v2/GetNodeList";
-      // http://192.168.5.168:8080/speed-china/cameraGroup/cameraGroup/getTree
       var url =
         "http://192.168.5.168:8080/speed-china/cameraGroup/cameraGroup/getTree";
       this.$http
         .get(url)
         .then((result) => {
           console.log("节点列表", result);
-          if (result.status == 200) {
-            if (result.data.result) {
-              var data = result.data.result;
-              this.data = this.to_data(data);
-              // if (Array.isArray(data)) {
-              //   data.sort((a, b) => {
-              //     if (a.strNodeName === b.strNodeName) return 0;
-
-              //     return a.strNodeName > b.strNodeName ? 1 : -1;
-              //   });
-              //   for (var i = 0; i < data.length; i++) {
-              //     var item = data[i];
-
-              //     this.data.push({
-              //       // token: item.strNodeId,
-              //       label: item.strNodeName,
-              //       iconclass: "iconfont icon-node",
-              //       children: [],
-              //     });
-              //     // this.GetsrcList(item.strNodeId);
-              //   }
-              //   console.log(this.data);
-              // }
-            }
-            // console.log(this.NodeData)
-          }
+          var data = result.result;
+          this.data = this.to_data(data);
         })
         .catch((error) => {
           console.log("GetNodeList");
@@ -877,7 +851,9 @@ export default {
           for (var i = 1; i <= this.rows; i++) {
             for (var c = 1; c <= this.cols; c++) {
               var video = document.getElementById("hvideo" + i + c);
-              console.log("video.paused++++", video.poster);
+              video.setAttribute("data-token", data.token);
+              video.setAttribute("data-code", data.code);
+              console.log("video.paused++++", video.poster, video);
               if (
                 video.poster == "" ||
                 video.poster == "http://192.16.3.45:8080/" ||
@@ -887,6 +863,7 @@ export default {
                 this.selectRow = i;
                 $(".h5container").removeClass("h5videoh");
                 $("#h" + this.selectRow + this.selectCol).addClass("h5videoh");
+
                 // console.log('video.paused1',video.poster,i,c);
                 return false;
               } else {

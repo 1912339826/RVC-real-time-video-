@@ -169,6 +169,7 @@ export default {
         }
     },
     mounted(){
+        console.log(listdatag,'22222222222222222')
     },
     methods:{
         datechange(){
